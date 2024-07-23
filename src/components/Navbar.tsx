@@ -2,7 +2,10 @@ import Link from "next/link";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import { buttonVariants } from "./ui/button";
 import { ArrowRight } from "lucide-react";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import {
+  getKindeServerSession,
+  LoginLink,
+} from "@kinde-oss/kinde-auth-nextjs/server";
 
 const Navbar = async () => {
   const { getUser } = getKindeServerSession();
@@ -60,15 +63,15 @@ const Navbar = async () => {
                 >
                   Sign Up
                 </Link>
-                <Link
-                  href="/api/auth/login"
+                <LoginLink
                   className={buttonVariants({
                     size: "sm",
                     variant: "ghost",
                   })}
                 >
                   Log In
-                </Link>
+                </LoginLink>
+
                 <div className="hidden h-8 w-px bg-zinc-200 sm:block" />
                 <Link
                   href="/configure/upload"
