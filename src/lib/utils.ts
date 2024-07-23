@@ -40,5 +40,6 @@ export function constructMetadata({
       images: [image],
     },
     icons,
+    metadataBase: new URL("https://casecobra-seven-delta.vercel.app/"),
   };
 }
