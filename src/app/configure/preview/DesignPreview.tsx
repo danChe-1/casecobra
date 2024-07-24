@@ -14,10 +14,16 @@ import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import LoginModal from "@/components/LoginModal";
-const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
+import { KindeUser } from "@kinde-oss/kinde-auth-nextjs/types";
+const DesignPreview = ({
+  configuration,
+  user,
+}: {
+  configuration: Configuration;
+  user: KindeUser | null;
+}) => {
   const router = useRouter();
   const { toast } = useToast();
-  const { user } = useKindeBrowserClient();
   const [showConfetti, setShowConfetti] = useState(false);
   useEffect(() => setShowConfetti(true));
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -53,7 +59,7 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
   const hadnleCheckout = () => {
     if (user) {
       //create payment session
-      createPaymentSession({ configId: configuration.id });
+      createPaymentSession({ configId: configuration.id, user });
     } else {
       //need to log in
       localStorage.setItem("configurationId", configuration.id);
